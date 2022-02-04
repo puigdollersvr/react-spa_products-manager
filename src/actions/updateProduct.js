@@ -3,5 +3,9 @@ import { createAction } from "redux-actions";
 import { apiPut } from "../api";
 import { urlProducts } from "../api/urls";
 
+/*
+ * CREATE THE UPDATE_PRODUCT ACTION
+ * USING "REDUX-ACTIONS" LIB.
+ */
 export const updateProduct = createAction(UPDATE_PRODUCT,
-    (searchKey, searchValue, product) => apiPut(urlProducts, searchKey, searchValue, product)() );
+    (id, product) => apiPut(urlProducts, id, product)() );
