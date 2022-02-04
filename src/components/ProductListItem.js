@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+/*
+ * THE LIST OF PRODUCTS PRODUCT 
+ * PRESENTATIONAL COMPONENT
+ */
 const ProductListItem = ({ name, editAction, delAction, urlPath, sku }) => {
     return (
         <div>
@@ -10,11 +14,21 @@ const ProductListItem = ({ name, editAction, delAction, urlPath, sku }) => {
                     <Link to={`${urlPath}${sku}`}>{name}</Link>
                 </div>
                 <div className="buttons flex flex-row basis-1/4 justify-end items-center px-8">
-                    <div className="field mx-2 bg-white hover:bg-sky-200 text-gray-800 font-semibold py-2 px-4 border border-gray-200 rounded">
-                        <Link to={`${urlPath}${sku}/edit`}>{editAction}</Link>
+                    <div>
+                        <Link 
+                            className="field mx-2 bg-white hover:bg-sky-200 text-gray-800 font-semibold py-2 px-4 border border-gray-200 rounded" 
+                            to={`${urlPath}${sku}/edit`}
+                        >
+                            {editAction}
+                        </Link>
                     </div>
-                    <div className="field mx-2 bg-white hover:bg-red-200 text-gray-800 font-semibold py-2 px-4 border border-gary-200 rounded">
-                        <Link to={`${urlPath}${sku}/del`}>{delAction}</Link>
+                    <div>
+                        <Link 
+                            className="field mx-2 bg-white hover:bg-red-200 text-gray-800 font-semibold py-2 px-4 border border-gary-200 rounded" 
+                            to={`${urlPath}${sku}/del`}
+                        >
+                            {delAction}
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -22,6 +36,7 @@ const ProductListItem = ({ name, editAction, delAction, urlPath, sku }) => {
     );
 };
 
+//Validate the necessary props.
 ProductListItem.propTypes = {
     name: PropTypes.string.isRequired,
     editAction: PropTypes.string.isRequired,
