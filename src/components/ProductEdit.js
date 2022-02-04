@@ -18,6 +18,25 @@ const renderField = ({input, meta, type, label, name, withFocus}) => (
     </div>
 );
 
+//Render a drop down list.
+const renderDropDownField = ({input, children, meta, label, name, withFocus}) => (
+    <div className='flex flex-row justify-center py-2'>
+        <div>
+            <label className='block text-gray-700 text-sm font-bold w-24 text-left self-center' htmlFor={name}>{label}</label>
+            {
+                meta.touched && meta.error && <span className='block text-xs text-red-500 text-left'>{meta.error}</span>
+            }
+        </div>
+        <select
+            className='shadow appearance-none border rounded py-2 w-80 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            {...input}
+            ref={withFocus} 
+        >
+            {children}
+        </select>
+    </div>
+);
+
 
 //Global form validations (only applied if there's no validation in the field).
 const validate = values => {
@@ -114,13 +133,19 @@ const ProductEdit = ({ handleSubmit, submitting, onBack, pristine }) => {
                     validate={isRequired}
                     label="Descripción"
                 ></Field>
+                
                 <Field 
                     name="category" 
-                    component={renderField} 
-                    type="text"
+                    component={renderDropDownField}
                     validate={isRequired}
                     label="Categoría"
-                ></Field>
+                >
+                    <option value="Bedroom">Bedroom</option>
+                    <option value="Bathroom">Bathroom</option>
+                    <option value="Kitchen">Kitchen</option>
+                    <option value="Living Room">Living Room</option>
+                    <option value="Home Office">Home Office</option>
+                </Field>
                 <Field 
                     name="price" 
                     component={renderField} 
