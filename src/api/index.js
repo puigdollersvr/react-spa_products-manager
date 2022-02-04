@@ -13,7 +13,11 @@ export const apiPutByQuery = (url, searchKey, searchValue, data) => () =>
     }).then(v => v.json())
     .then( r => {
         if(r.error) {
-            return Promise.reject(new Error(r.message));
+            let errorMessage = "No se pudo actualizar el producto, el servidor devolvió un error desconocido."
+            if (r.status) {
+                errorMessage = "No se pudo actualizar el producto, el servidor devolvió un error " + r.status.toString() + "."
+            }
+            return Promise.reject(new Error(errorMessage));
         }
         return r;
     });
@@ -30,7 +34,20 @@ export const apiPut = (url, id, data) => () =>
     }).then(v => v.json())
     .then( r => {
         if(r.error) {
-            return Promise.reject(new Error(r.message));
+            
+            let errorMessage = "No se pudo actualizar el producto, el servidor devolvió un error desconocido."
+
+            if (r.status) {
+                errorMessage = "No se pudo actualizar el producto, el servidor devolvió un error " + r.status.toString() + "."
+            }
+            if (r.message && r.message.keyPattern && r.message.keyPattern.sku ) {
+                errorMessage = "No se pudo actualizar el producto, el SKU es inválido o está repetido."
+            }
+            if (r.message && r.message.errors && r.message.errors.category) {
+                errorMessage = "No se pudo actualizar el producto, la categoría no es correcta."
+            }
+
+            return Promise.reject(new Error(errorMessage));
         }
         return r;
     });
@@ -46,7 +63,20 @@ export const apiPost = (url, data) => () =>
     }).then(v => v.json())
     .then( r => {
         if(r.error) {
-            return Promise.reject(new Error(r.message));
+            
+            let errorMessage = "No se pudo actualizar el producto, el servidor devolvió un error desconocido."
+            
+            if (r.status) {
+                errorMessage = "No se pudo actualizar el producto, el servidor devolvió un error " + r.status.toString() + "."
+            }
+            if (r.message && r.message.keyPattern && r.message.keyPattern.sku ) {
+                errorMessage = "No se pudo actualizar el producto, el SKU es inválido o está repetido."
+            }
+            if (r.message && r.message.errors && r.message.errors.category) {
+                errorMessage = "No se pudo actualizar el producto, la categoría no es correcta."
+            }
+
+            return Promise.reject(new Error(errorMessage));
         }
         return r;
     });
@@ -64,7 +94,11 @@ export const apiDeleteByQuery = (url, searchKey, searchValue) => () =>
     }).then(v => v.json())
     .then( r => {
         if(r.error) {
-            return Promise.reject(new Error(r.message));
+            let errorMessage = "No se pudo borrar el producto, el servidor devolvió un error desconocido."
+            if (r.status) {
+                errorMessage = "No se pudo borrar el producto, el servidor devolvió un error " + r.status.toString() + "."
+            }
+            return Promise.reject(new Error(errorMessage));
         }
         return r._id;
     });
@@ -81,7 +115,11 @@ export const apiDelete = (url, id) => () =>
     }).then(v => v.json())
     .then( r => {
         if(r.error) {
-            return Promise.reject(new Error(r.message));
+            let errorMessage = "No se pudo borrar el producto, el servidor devolvió un error desconocido."
+            if (r.status) {
+                errorMessage = "No se pudo borrar el producto, el servidor devolvió un error " + r.status.toString() + "."
+            }
+            return Promise.reject(new Error(errorMessage));
         }
         return r._id;
     });
