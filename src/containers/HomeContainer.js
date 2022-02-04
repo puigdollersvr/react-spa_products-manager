@@ -3,14 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import AppFrame from '../components/AppFrame';
 import ProductsActions from '../components/ProductsActions';
 
+/*
+ * THE HOME CONNECTED COMPONENT
+ */
 const HomeContainer = props => {
 
+    //Declare the useNavigate hook.
     let navigate = useNavigate();
 
+    //Handle "See products list" button click and show it.
     function handleClick() {
         navigate("/products");
     }
 
+    //Render APP.
     return (
         <div>
             <AppFrame

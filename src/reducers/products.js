@@ -1,6 +1,9 @@
 import { handleActions } from "redux-actions";
 import { DELETE_PRODUCT, FETCH_PRODUCTS, INSERT_PRODUCT, UPDATE_PRODUCT } from "../constants";
 
+/*
+ * Create the products reducers 
+ */
 export const products = handleActions({
     [FETCH_PRODUCTS]: (state, action) => [...action.payload.products],
     [INSERT_PRODUCT]: (state, action) => [...state, action.payload],

@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/*
+ * THE APP HEADER
+ * PRESENTATIONAL COMPONENT
+ */
 const AppHeader = props => {
     return (
         <div>
@@ -11,6 +15,7 @@ const AppHeader = props => {
     );
 };
 
+//Validate necessary props
 AppHeader.propTypes = {
     title: PropTypes.string.isRequired
 };

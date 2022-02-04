@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ProductsActions from './ProductsActions';
 
+/*
+ * THE SHOW SINGLE PRODUCT DATA
+ * PRESENTATIONAL COMPONENT
+ */
 const ProductData = ( { 
         name, sku, price, description, category, stock, onBack, isDeleteAllow, onDelete 
     } ) => {
@@ -42,6 +46,7 @@ const ProductData = ( {
     );
 };
 
+//Validate necessary props
 ProductData.propTypes = {
     name: PropTypes.string.isRequired,
     sku: PropTypes.string.isRequired,

@@ -6,9 +6,6 @@ import ProductsContainer from './containers/ProductsContainer';
 import ProductContainer from './containers/ProductContainer';
 import NewProductContainer from './containers/NewProductContainer';
 
-const RenderProductNewContainer = () => <h1>Product New Container</h1>
-const ProductContainerEdit = () => <b>Es edición</b>
-
 function App() {
 
   return (
