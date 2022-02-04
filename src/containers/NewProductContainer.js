@@ -1,42 +1,52 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import AppFrame from '../components/AppFrame';
 import ProductEdit from '../components/ProductEdit';
-import { useMatch, useNavigate, useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { insertProduct } from '../actions/insertProduct';
 import { SubmissionError } from 'redux-form';
 
+/*
+ * THE PRODUCT'S CONNECTED COMPONENT
+ * FOR CREATE NEW PRODUCT DATA
+ * PRESENTATIONAL COMPONENT
+ */
 const NewProductContainer = props => {
 
+    //Declare navigate and dispatch hooks.
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    //Handle submit and create product.
     const handleSubmit = values => {
         return dispatch(insertProduct(values)).then(() => {}, (error) => {
             if (error) {
                 const errors = {
-                    sku: error.toString()
+                    error: error.toString()
                 };
                 throw new SubmissionError(errors);
             }
         });
     }
 
+    //Go back if submit succeeded.
     const handleSubmitSuccess = () => {
         navigate(-1);
     }
-        
+       
+    //Handle back button click and go back.
     const handleOnBack = () => {
         navigate(-1);
     }
 
+    //Render body.
     const renderBody = () => {
         return <ProductEdit onSubmit={handleSubmit}
                     onSubmitSuccess={handleSubmitSuccess}
                     onBack={handleOnBack} />
     }
 
+    //Render APP.
     return (
         <div>
             <AppFrame header={"Nuevo producto"}
@@ -44,10 +54,6 @@ const NewProductContainer = props => {
             ></AppFrame>
         </div>
     );
-};
-
-NewProductContainer.propTypes = {
-    
 };
 
 export default NewProductContainer;

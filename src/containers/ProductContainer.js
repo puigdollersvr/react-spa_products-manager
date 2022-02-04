@@ -37,7 +37,7 @@ const ProductContainer = () => {
         return dispatch(updateProduct(_id, values)).then(() => {}, (error) => {
             if (error) {
                 const errors = {
-                    sku: error.toString()
+                    error: error.toString()
                 };
                 throw new SubmissionError(errors);
             }
@@ -71,7 +71,7 @@ const ProductContainer = () => {
         }
     }, [product])
 
-    //Manage which presentational component should be rendered.
+    //Manage which presentational component should be rendered and render body.
     const renderBody = () => {
         if (product) {
             const ProductControl = isEdit ? ProductEdit : ProductData;
@@ -85,7 +85,7 @@ const ProductContainer = () => {
         } 
     }
 
-    //Render APP
+    //Render APP.
     return (
         <div>
             <AppFrame 
