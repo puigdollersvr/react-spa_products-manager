@@ -56,10 +56,12 @@ const ProductContainer = () => {
 
     //Handle delete button click and remove product, then go back.
     const handleDelete = () => {
-        console.log("HANDLE DELETE");
-        dispatch(deleteProduct('sku', sku)).then(
-            navigate(-1)
-        );
+        const { _id } = product;
+        if(_id){
+            dispatch(deleteProduct(_id)).then(
+                navigate(-1)
+            );
+        }
     }
 
     //Fetch products if there's no product in the state.

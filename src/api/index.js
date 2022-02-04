@@ -53,11 +53,29 @@ export const apiPost = (url, data) => () =>
 
 
 /*
- *  DELETE REQUEST - REMOVE PRODUCT
+ * DELETE REQUEST - REMOVE BY QUERY
+ * (NOT IN USE) 
  */
-export const apiDelete = (url, searchKey, searchValue) => () => 
+export const apiDeleteByQuery = (url, searchKey, searchValue) => () => 
     fetch(
         `${url}/${searchKey}/${searchValue}`, {
+        method: 'DELETE',
+        headers: new Headers({ 'Content-type': 'application/json' })
+    }).then(v => v.json())
+    .then( r => {
+        if(r.error) {
+            return Promise.reject(new Error(r.message));
+        }
+        return r._id;
+    });
+
+
+/*
+ *  DELETE REQUEST - REMOVE PRODUCT
+ */
+export const apiDelete = (url, id) => () => 
+    fetch(
+        `${url}/${id}`, {
         method: 'DELETE',
         headers: new Headers({ 'Content-type': 'application/json' })
     }).then(v => v.json())
