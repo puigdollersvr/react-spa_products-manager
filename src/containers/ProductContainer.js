@@ -9,6 +9,7 @@ import { fetchProducts } from '../actions/fetchProducts';
 import { updateProduct } from '../actions/updateProduct';
 import { SubmissionError } from 'redux-form';
 import { deleteProduct } from '../actions/deleteProduct';
+import FetchProductsError from '../components/FetchProductsError';
 
 /*
  * THE PRODUCT'S CONNECTED COMPONENT
@@ -82,7 +83,9 @@ const ProductContainer = () => {
                         isDeleteAllow={!!isDelete}
                         onDelete={handleDelete}
                     />
-        } 
+        } else {
+            return <FetchProductsError />
+        }
     }
 
     //Render APP.

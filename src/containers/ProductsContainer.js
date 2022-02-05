@@ -6,6 +6,7 @@ import ProductsActions from '../components/ProductsActions';
 import { useNavigate } from 'react-router-dom';
 import { fetchProducts } from '../actions/fetchProducts';
 import { getProducts } from '../selectors/products';
+import FetchProductsError from '../components/FetchProductsError';
 
 /*
  * THE PRODUCTS LIST CONNECTED COMPONENT
@@ -16,6 +17,9 @@ const ProductsContainer = props => {
     
     //Get products.
     const products = useSelector(state => getProducts(state));
+
+    //Check products length.
+    const emptyProducts = products.length > 0;
     
     //Declare the hook useDispatch and use navigate.
     const dispatch = useDispatch();
@@ -24,7 +28,7 @@ const ProductsContainer = props => {
     //If there's no products in the state, get them.
     useEffect(() => {
         if(!products || products.length === 0 ) {
-            dispatch(fetchProducts());
+            dispatch(fetchProducts())
         }
     }, [products])
 
@@ -35,6 +39,7 @@ const ProductsContainer = props => {
 
     //Render body.
     const renderBody = products => (
+        emptyProducts ?
         <div>
             <ProductsList
                 products={products}
@@ -45,7 +50,8 @@ const ProductsContainer = props => {
                 <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" onClick={handleAddNew}>Nuevo Producto</button>
 
             </ProductsActions>
-        </div>
+        </div> :
+        <FetchProductsError />
     )
 
     //Render APP.
