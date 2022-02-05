@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/*
+ * THE SHOW SINGLE PRODUCT DATA ACTIONS
+ * (BUTTONS) PRESENTATIONAL COMPONENT
+ */
 const ProductsActions = ({ children }) => {
     return (
         <div>
@@ -11,6 +15,7 @@ const ProductsActions = ({ children }) => {
     );
 };
 
+//Validate necessary props
 ProductsActions.propTypes = {
     children: PropTypes.node.isRequired,
 };

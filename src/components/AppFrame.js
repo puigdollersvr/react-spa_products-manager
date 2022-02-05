@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppHeader from './AppHeader';
 
+/*
+ * THE APP FRAME (WITH FOOTER) 
+ * PRESENTATIONAL COMPONENT
+ */
 const AppFrame = ({header, body}) => {
     return (
         <div>
@@ -14,6 +18,7 @@ const AppFrame = ({header, body}) => {
     );
 };
 
+//Validate necessary props
 AppFrame.propTypes = {
     header: PropTypes.string.isRequired,
     body: PropTypes.element.isRequired,

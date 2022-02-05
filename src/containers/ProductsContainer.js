@@ -7,24 +7,33 @@ import { useNavigate } from 'react-router-dom';
 import { fetchProducts } from '../actions/fetchProducts';
 import { getProducts } from '../selectors/products';
 
+/*
+ * THE PRODUCTS LIST CONNECTED COMPONENT
+ * FOR PRODUCTS LIST
+ * PRESENTATIONAL COMPONENT
+ */
 const ProductsContainer = props => {
     
-    //REDUX Hooks: https://thoughtbot.com/blog/using-redux-with-react-hooks
+    //Get products.
     const products = useSelector(state => getProducts(state));
+    
+    //Declare the hook useDispatch and use navigate.
     const dispatch = useDispatch();
+    let navigate = useNavigate();
 
+    //If there's no products in the state, get them.
     useEffect(() => {
         if(!products || products.length === 0 ) {
             dispatch(fetchProducts());
         }
     }, [products])
 
-    let navigate = useNavigate();
-
+    //Handle add new product button click and navigate to new product page.
     function handleAddNew() {
         navigate("/products/new");
     }
 
+    //Render body.
     const renderBody = products => (
         <div>
             <ProductsList
@@ -39,6 +48,7 @@ const ProductsContainer = props => {
         </div>
     )
 
+    //Render APP.
     return (
         <div>
             <AppFrame 

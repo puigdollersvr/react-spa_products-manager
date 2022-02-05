@@ -2,12 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ProductListItem from './ProductListItem';
 
+/*
+ * SINGLE ITEM OF THE PRODUCTS LIST 
+ * PRESENTATIONAL COMPONENT
+ */
 const ProductsList = ({ products, urlPath }) => {
+
+    //Filter products.
+    let validProducts = products.filter(function (el) {
+        return el.sku != null;
+    });
+     
+    //Render product list.
     return (
         <div>
             <div className="products-list">
             {
-                products.map( p =>
+                validProducts.map( p =>
                     <ProductListItem
                         key={p.sku}
                         name={p.name}
@@ -23,6 +34,7 @@ const ProductsList = ({ products, urlPath }) => {
     );
 };
 
+//Validate necessary props
 ProductsList.propTypes = {
     products: PropTypes.array.isRequired,
     urlPath: PropTypes.string.isRequired,
