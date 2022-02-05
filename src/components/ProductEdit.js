@@ -140,6 +140,7 @@ const ProductEdit = ({ handleSubmit, submitting, onBack, pristine }) => {
                     validate={isRequired}
                     label="Categoría"
                 >
+                    <option value="" selected disabled hidden>Elige una categoría</option>
                     <option value="Bedroom">Bedroom</option>
                     <option value="Bathroom">Bathroom</option>
                     <option value="Kitchen">Kitchen</option>
