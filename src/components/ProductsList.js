@@ -7,11 +7,18 @@ import ProductListItem from './ProductListItem';
  * PRESENTATIONAL COMPONENT
  */
 const ProductsList = ({ products, urlPath }) => {
+
+    //Filter products.
+    let validProducts = products.filter(function (el) {
+        return el.sku != null;
+    });
+     
+    //Render product list.
     return (
         <div>
             <div className="products-list">
             {
-                products.map( p =>
+                validProducts.map( p =>
                     <ProductListItem
                         key={p.sku}
                         name={p.name}
