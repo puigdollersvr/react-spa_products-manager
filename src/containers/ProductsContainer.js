@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AppFrame from '../components/AppFrame';
 import ProductsList from '../components/ProductsList';
@@ -18,8 +18,8 @@ const ProductsContainer = props => {
     //Get products.
     const products = useSelector(state => getProducts(state));
 
-    //Check products length.
-    const emptyProducts = products.length > 0;
+    //Error
+    const [error, setError] = useState(false);
     
     //Declare the hook useDispatch and use navigate.
     const dispatch = useDispatch();
@@ -28,7 +28,11 @@ const ProductsContainer = props => {
     //If there's no products in the state, get them.
     useEffect(() => {
         if(!products || products.length === 0 ) {
-            dispatch(fetchProducts())
+            dispatch(fetchProducts()).then(() => {}, (error) => {
+                if (error) {
+                    setError(true);
+                }
+            });
         }
     }, [products])
 
@@ -39,7 +43,7 @@ const ProductsContainer = props => {
 
     //Render body.
     const renderBody = products => (
-        emptyProducts ?
+        !error ?
         <div>
             <ProductsList
                 products={products}
