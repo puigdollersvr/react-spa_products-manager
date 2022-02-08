@@ -1,4 +1,11 @@
-export const apiGet = (url) => () => fetch(url).then(v => v.json());
+export const apiGet = (url) => () => 
+    fetch(url).then(v => v.json())
+    .then( r => {
+        if(r.error) {
+            return Promise.reject(new Error("No se pudieron obtener productos."));
+        }
+        return r;
+    })
 
 /*
  * PUT REQUEST - UPDATE BY QUERY

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AppFrame from '../components/AppFrame';
 import { useMatch, useNavigate, useParams } from 'react-router-dom';
@@ -28,6 +28,9 @@ const ProductContainer = () => {
     //Declare navigate and dispatch hooks.
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    //Error
+    const [error, setError] = useState(false);
 
     //Get product from state by its SKU.
     const product = useSelector((state) => getProductBySku(state, sku));
@@ -68,12 +71,19 @@ const ProductContainer = () => {
     //Fetch products if there's no product in the state.
     useEffect(() => {
         if(!product) {
-            dispatch(fetchProducts());
+            dispatch(fetchProducts()).then(() => {}, (error) => {
+                if (error) {
+                    setError(true);
+                }
+            });
         }
     }, [product])
 
     //Manage which presentational component should be rendered and render body.
     const renderBody = () => {
+        if (error) {
+            return <FetchProductsError />
+        }
         if (product) {
             const ProductControl = isEdit ? ProductEdit : ProductData;
             return <ProductControl {...product} 
@@ -83,9 +93,10 @@ const ProductContainer = () => {
                         isDeleteAllow={!!isDelete}
                         onDelete={handleDelete}
                     />
-        } else {
-            return <FetchProductsError />
-        }
+        } 
+        
+        
+        
     }
 
     //Render APP.
