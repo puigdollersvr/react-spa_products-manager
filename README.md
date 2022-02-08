@@ -9,6 +9,13 @@ Para su arquitectura se ha usado el patrón de diseño **Flux**
 mediante la libreria **[React Redux](https://react-redux.js.org/)**
 y el patrón **Presentational and Container component**.
 
+## Iniciar la aplicación - Docker requerido
+
+Es necesario todo el contenedor de Docker con la base de datos y la REST API en Express.
+
+    docker-compose build
+    docker-compose up
+
 ## Scripts disponibles
 
 En el directorio del proyecto, puedes usar:
